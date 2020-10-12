@@ -11,12 +11,21 @@ class LogAnalyzer
 
     @log.each_line do |line|
       page, ip = line.split
-      if result[page]
-        result[page] += 1
-      else
-        result[page] = 1
-      end
+      result[page] ||= 0
+      result[page] += 1
     end
     result
+  end
+
+  def histogram
+    ordered_view.map do |page, count|
+      "#{page} #{count}"
+    end.join('\n')
+  end
+
+  private
+
+  def ordered_view
+    views.sort_by { |_page, count| -count }
   end
 end

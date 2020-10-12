@@ -16,16 +16,28 @@ describe LogAnalyzer do
   end
 
   describe '#views' do
-    it 'returns a Hash containing the visits' do
+    it 'returns a Hash containing the page views' do
       analyzer = described_class.new(sample_data)
 
       expect(analyzer.views).to be_a(Hash)
     end
 
-    it 'returns the correct view counting' do
+    it 'counts the number of pages' do
       analyzer = described_class.new(sample_data)
 
       expect(analyzer.views).to eq({ '/a' => 3, '/b' => 1, '/c' => 2 })
+    end
+  end
+
+  describe '#histogram' do
+    it 'returns the page view count histogram' do
+      analyzer = described_class.new(sample_data)
+
+      expect(analyzer.histogram).to eq(
+        '/a 3\n' \
+        '/c 2\n' \
+        '/b 1'
+      )
     end
   end
 end
