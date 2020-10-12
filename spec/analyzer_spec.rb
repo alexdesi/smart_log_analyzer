@@ -18,7 +18,14 @@ describe LogAnalyzer do
   describe '#views' do
     it 'returns a Hash containing the visits' do
       analyzer = described_class.new(sample_data)
+
       expect(analyzer.views).to be_a(Hash)
+    end
+
+    it 'returns the correct view counting' do
+      analyzer = described_class.new(sample_data)
+
+      expect(analyzer.views).to eq({ '/a' => 3, '/b' => 1, '/c' => 2 })
     end
   end
 end
