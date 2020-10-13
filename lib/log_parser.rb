@@ -9,11 +9,13 @@ class LogParser
 
   def next_entry
     line = log.gets
+    return line unless line
+
     page, ip = line.split
 
     {
       page: page,
-      ip: ip
+      ip: ip.to_i
     }
   end
 

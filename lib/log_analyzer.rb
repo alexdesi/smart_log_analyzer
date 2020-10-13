@@ -7,20 +7,16 @@ class LogAnalyzer
   end
 
   def total_visits
-    visits_grouped_by_page.map { |page, visits| [page, visits.sum { |visit| visit[1] }] }
+    visits_grouped_by_page
+      .map { |page, visits| [page, visits.sum { |visit| visit[1] }] }
+      .sort_by { |_page, visits| -visits }
   end
 
   # This method only consider the unique visits. If an IP visited 3 times the same pages, it counts as one visit
-  def unique_total_visits
-    visits_grouped_by_page.map { |page, visits| [page, visits.count] }
-  end
-
-  def histogram
-    total_visits
-      .sort_by { |_page, count| -count }
-      .map do |page, count|
-        "#{page} #{count}"
-      end.join('\n')
+  def unique_total_views
+    visits_grouped_by_page
+      .map { |page, visits| [page, visits.count] }
+      .sort_by { |_page, visits| -visits }
   end
 
   private
@@ -35,8 +31,9 @@ class LogAnalyzer
   #   ...
   # }
   def page_ip_visit_counts
-    result = {}
+    return @page_ip_visit_counts if @page_ip_visit_counts
 
+    result = {}
     while (entry = log_parser.next_entry)
       page_ip = [entry[:page], entry[:ip]]
 
@@ -44,6 +41,7 @@ class LogAnalyzer
       result[page_ip] += 1
     end
 
+    @page_ip_visit_counts = result
     result
   end
 
@@ -53,9 +51,5 @@ class LogAnalyzer
   def visits_grouped_by_page
     page_ip_visit_counts
       .group_by { |page_ip, _item| page_ip.first }
-  end
-
-  def ordered_view
-    unique_views.sort_by { |_page, entry| -entry[:count] }
   end
 end
