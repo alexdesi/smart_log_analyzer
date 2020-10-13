@@ -1,3 +1,4 @@
+#!/usr/bin/ruby
 # frozen_string_literal: true
 
 require_relative 'lib/log_parser'
