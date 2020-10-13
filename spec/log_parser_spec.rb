@@ -18,4 +18,12 @@ describe LogParser do
       expect(entry.keys).to include(:page, :ip)
     end
   end
+
+  describe 'when file does not exist' do
+    it 'raises an exception' do
+      expect do
+        LogParser.new('non-existent-file.log')
+      end.to raise_error(Errno::ENOENT)
+    end
+  end
 end
