@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# This class reads the weblog and allows to read
+# the visit (page and IP) line by line
 class LogParser
   def initialize(filename)
     @log = File.open(filename)
