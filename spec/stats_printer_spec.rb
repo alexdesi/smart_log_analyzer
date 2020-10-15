@@ -4,7 +4,7 @@ require 'rspec'
 require_relative '../lib/stats_printer'
 
 describe StatsPrinter do
-  subject(:printer) { described_class.new(page_visits)}
+  subject(:printer) { described_class.new(page_visits) }
 
   let(:page_visits) { [['/a', 3], ['/b', 2]] }
 

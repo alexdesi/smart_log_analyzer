@@ -15,7 +15,7 @@ class LogParser
     line = log.gets
     unless line
       File.close(log)
-      return nil 
+      return nil
     end
 
     return nil unless (matches = line.match(VISIT_REGEX))
