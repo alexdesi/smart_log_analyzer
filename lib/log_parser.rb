@@ -11,8 +11,6 @@ class LogParser
     abort "Ops, the file '#{filename}' not exist!"
   end
 
-  # Note: if the row does not match with the regex, it just skips it
-  #       and does not raise error (fault tollerant approach).
   def next_entry
     line = log.gets
     return nil unless line

@@ -5,7 +5,7 @@ require_relative '../lib/log_parser'
 
 # rubocop:disable Metrics/BlockLength
 describe LogParser do
-  let(:log_parser) { LogParser.new(filename) }
+  subject(:log_parser) { LogParser.new(filename) }
 
   it 'initializes the LogParser' do
     log_parser = LogParser.new('data/fixtures/webserver_sample.log')
