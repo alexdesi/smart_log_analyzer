@@ -13,7 +13,11 @@ class LogParser
 
   def next_entry
     line = log.gets
-    return nil unless line
+    unless line
+      File.close(log)
+      return nil 
+    end
+
     return nil unless (matches = line.match(VISIT_REGEX))
 
     {
