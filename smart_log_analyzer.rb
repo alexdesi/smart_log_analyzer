@@ -24,12 +24,7 @@ end
 
 filename = ARGV.first
 
-begin
-  parser = LogParser.new(filename)
-rescue Errno::ENOENT
-  puts "Ops, the file '#{filename}' not exist!"
-  return
-end
+parser = LogParser.new(filename)
 
 log_analyzer = LogAnalyzer.new(parser)
 

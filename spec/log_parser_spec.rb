@@ -43,7 +43,7 @@ describe LogParser do
       it 'raises an exception' do
         expect do
           LogParser.new(filename)
-        end.to raise_error(Errno::ENOENT)
+        end.to raise_error("Ops, the file '#{filename}' not exist!")
       end
     end
   end

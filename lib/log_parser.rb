@@ -7,6 +7,8 @@ class LogParser
 
   def initialize(filename)
     @log = File.open(filename)
+  rescue Errno::ENOENT
+    abort "Ops, the file '#{filename}' not exist!"
   end
 
   # Note: if the row does not match with the regex, it just skips it
