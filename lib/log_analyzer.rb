@@ -12,7 +12,6 @@ class LogAnalyzer
       .sort_by { |_page, visits| -visits }
   end
 
-  # This method only consider the unique visits. If an IP visited 3 times the same pages, it counts as one visit
   def unique_total_views
     visits_grouped_by_page
       .map { |page, visits| [page, visits.count] }
@@ -23,7 +22,6 @@ class LogAnalyzer
 
   attr_reader :log_parser
 
-  # This method returns the page-ip counts
   # Output example:
   # {
   #   ['/a', '1.1.1.1'] => 2,

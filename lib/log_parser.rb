@@ -7,13 +7,17 @@ class LogParser
 
   def initialize(filename)
     @log = File.open(filename)
+  rescue Errno::ENOENT
+    abort "Ops, the file '#{filename}' not exist!"
   end
 
-  # Note: if the row does not match with the regex, it just skips it
-  #       and does not raise error (fault tollerant approach).
   def next_entry
     line = log.gets
-    return nil unless line
+    unless line
+      File.close(log)
+      return nil
+    end
+
     return nil unless (matches = line.match(VISIT_REGEX))
 
     {

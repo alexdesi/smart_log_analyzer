@@ -37,7 +37,7 @@ describe LogAnalyzer do
           { page: '/a', ip: '1.1.1.1' },
           { page: '/a', ip: '2.2.2.2' },
           { page: '/b', ip: '9.9.9.9' },
-          { page: '/a', ip: '1.1.1.1' }, # page '/a' has been already visited by '1.1.1.1'
+          { page: '/a', ip: '1.1.1.1' },
           nil
         )
 
@@ -64,13 +64,13 @@ describe LogAnalyzer do
           { page: '/a', ip: '1.1.1.1' },
           { page: '/a', ip: '2.2.2.2' },
           { page: '/b', ip: '9.9.9.9' },
-          { page: '/a', ip: '1.1.1.1' }, # page '/a' has been already visited by '1.1.1.1'
+          { page: '/a', ip: '1.1.1.1' },
           nil
         )
 
         expect(analyzer.unique_total_views).to eq(
           [
-            ['/a', 2], # from IP '1.1.1.1' and '2.2.2.2'
+            ['/a', 2],
             ['/b', 1]
           ]
         )
